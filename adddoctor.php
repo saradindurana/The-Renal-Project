@@ -1,0 +1,32 @@
+<?php 
+session_start();
+if(!isset($_SESSION['adminlogged']))
+{
+  header("location:index.html");
+}
+include 'database.php';
+
+
+if (isset($_POST)) {
+    $username=$_POST['username'];
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+    $phone=$_POST['phone'];
+   
+}
+//insert new
+$sql= "INSERT INTO doctor (username, name, email,password,phone) VALUES ('$username', '$name', '$email', '$password','$phone')";
+if ($conn->query($sql) === true) { ?>
+
+<script type="text/javascript">
+            alert('Doctor Added');
+            window.location.href = "admin.php";
+        </script>
+    
+<?php } else {
+        echo "<script>alert('Error: ' . $sql . '<br>' . $conn->error')</script>";
+    }
+
+
+    ?>
